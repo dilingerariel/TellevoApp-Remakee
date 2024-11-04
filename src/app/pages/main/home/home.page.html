@@ -1,0 +1,101 @@
+<ion-content>
+  <app-header [showMenu]="true" title="Inicio"></app-header>
+
+  <ion-tabs>
+    <!-- Pestaña Unirse a viaje -->
+    <ion-tab tab="home">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Unirse a viaje</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="example-content">Unirse a viaje</div>
+      </ion-content>
+    </ion-tab>
+
+    <!-- Pestaña Iniciar un viaje (Formulario) -->
+    <ion-tab tab="radio">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Iniciar un viaje</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="form-content">
+        <form [formGroup]="form" class="form-wrapper ion-padding" (ngSubmit)="submit()" (keypress.enter)="submit()">
+          
+          <!-- Vehículo -->
+          <app-custom-input
+            autocomplete="vehiculo"
+            [control]="form.controls.vehiculo"
+            type="text"
+            label="Vehículo"
+          ></app-custom-input>
+
+          <!-- Patente -->
+          <app-custom-input
+            autocomplete="patente"
+            [control]="form.controls.patente"
+            type="text"
+            label="Patente"
+          ></app-custom-input>
+
+          <!-- Espacio Disponible -->
+          <app-custom-input
+            [control]="form.controls.espacio"
+            type="number"
+            label="Espacio disponible"
+          ></app-custom-input>
+
+          <!-- Precio por persona -->
+          <app-custom-input
+            [control]="form.controls.price"
+            type="number"
+            label="Precio por persona"
+          ></app-custom-input>
+
+          <!-- Destino (Mapa) -->
+          <ion-item>
+            <ion-label position="stacked">Destino</ion-label>
+            <div id="map" style="height: 400px;"></div>
+          </ion-item> 
+
+          <!-- Botón de envío -->
+          <ion-button mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid">
+            Iniciar viaje
+            <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+          </ion-button>
+          
+        </form>
+      </ion-content>
+    </ion-tab>
+
+    <!-- Pestaña Adicional -->
+    <ion-tab tab="search">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Esto no sé qué poner</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="example-content">Esto no sé qué poner</div>
+      </ion-content>
+    </ion-tab>
+
+    <!-- Barra de pestañas inferior -->
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="play-circle"></ion-icon>
+        <ion-label>Unirse a viaje</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="radio">
+        <ion-icon name="radio"></ion-icon>
+        <ion-label>Iniciar un viaje</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="search">
+        <ion-icon name="search"></ion-icon>
+        <ion-label>Esto no sé qué poner</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

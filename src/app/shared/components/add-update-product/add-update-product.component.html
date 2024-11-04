@@ -1,0 +1,128 @@
+<ion-content>
+  <app-header [showMenu]="true" title="Inicio"></app-header>
+  <ion-tabs>
+    <ion-tab tab="home">
+      <div id="home-page">
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Unirse a viaje</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <div class="example-content">Unirse a viaje</div>
+        </ion-content>
+      </div>
+    </ion-tab>
+    <ion-tab tab="radio">
+      <div id="radio-page">
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Iniciar un viaje</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+
+          <!-- Aquí va el formulario -->
+          <app-header [isModal]="true" title="Iniciar un viaje"></app-header>
+          <form [formGroup]="form" class="ion-padding ion-text-center" (ngSubmit)="submit()" (keypress.enter)="submit()">
+            
+            <!-- Vehículo -->
+            <app-custom-input
+              autocomplete="vehiculo"
+              [control]="form.controls.vehiculo"
+              type="text"
+              label="Vehículo"
+            ></app-custom-input>
+
+            <div class="validators" *ngIf="form.controls.vehiculo.errors && form.controls.vehiculo.touched">
+              <div *ngIf="form.controls.vehiculo.errors?.['required']">Este campo es requerido</div>
+              <div *ngIf="form.controls.vehiculo.errors?.['minlength']">El vehículo debe tener al menos 3 caracteres</div>
+            </div>
+
+            <!-- Patente -->
+            <app-custom-input
+              autocomplete="patente"
+              [control]="form.controls.patente"
+              type="text"
+              label="Patente"
+            ></app-custom-input>
+
+            <div class="validators" *ngIf="form.controls.patente.errors && form.controls.patente.touched">
+              <div *ngIf="form.controls.patente.errors?.['required']">Este campo es requerido</div>
+              <div *ngIf="form.controls.patente.errors?.['minlength']">La patente debe tener al menos 6 caracteres</div>
+            </div>
+
+            <!-- Espacio Disponible -->
+            <app-custom-input
+              [control]="form.controls.espacio"
+              type="number"
+              label="Espacio disponible"
+            ></app-custom-input>
+
+            <div class="validators" *ngIf="form.controls.espacio.errors && form.controls.espacio.touched">
+              <div *ngIf="form.controls.espacio.errors?.['required']">Este campo es requerido</div>
+              <div *ngIf="form.controls.espacio.errors?.['min']">Debe haber al menos 1 espacio disponible</div>
+            </div>
+
+            <!-- Precio por persona -->
+            <app-custom-input
+              [control]="form.controls.price"
+              type="number"
+              label="Precio por persona"
+            ></app-custom-input>
+
+            <div class="validators" *ngIf="form.controls.price.errors && form.controls.price.touched">
+              <div *ngIf="form.controls.price.errors?.['required']">Este campo es requerido</div>
+              <div *ngIf="form.controls.price.errors?.['min']">El precio mínimo debe ser $0</div>
+            </div>
+
+            <!-- Destino (Mapa) -->
+            <ion-item>
+              <ion-label position="stacked">Destino</ion-label>
+              <div id="map" style="height: 300px; width: 100%;"></div>
+            </ion-item>
+            <ion-note *ngIf="form.get('destination').invalid && form.get('destination').touched" color="danger">
+              El destino es requerido. Haga clic en el mapa para seleccionarlo.
+            </ion-note>    
+
+            <!-- Botón de envío -->
+            <ion-button mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid">
+              Iniciar viaje
+              <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+            </ion-button>
+            
+          </form>
+          <!-- Fin del formulario -->
+
+        </ion-content>
+      </div>
+    </ion-tab>
+    <ion-tab tab="search">
+      <div id="search-page">
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>esto noc que poner</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <div class="example-content">esto noc que poner</div>
+        </ion-content>
+      </div>
+    </ion-tab>
+
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="play-circle"></ion-icon>
+        Unirse a viaje
+      </ion-tab-button>
+      <ion-tab-button tab="radio">
+        <ion-icon name="radio"></ion-icon>
+        Iniciar un viaje
+      </ion-tab-button>
+      <ion-tab-button tab="search">
+        <ion-icon name="search"></ion-icon>
+        esto noc que poner
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>
